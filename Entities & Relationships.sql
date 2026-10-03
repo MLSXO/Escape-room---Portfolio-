@@ -1,58 +1,70 @@
 
--- 1: Escape Rooms 
+-- 1: Escape Rooms
 CREATE TABLE Escape_room (
-Room_ID INT AUTO INCREMENT,
+Room_ID INT AUTO_INCREMENT, -- Primary Key
 Escape_Room_Title varchar(45),
 Escape_Room_Theme varchar(45),
-Escape_Room_DifficultyLevel INT,-- INT eller varchar? 
-Duration INT ) 
+DifficultyLevel INT,
+Duration INT
+)
 
--- Puzzles 
+-- Puzzles
 CREATE TABLE Puzzles(
-Room_ID INT AUTO INCREMENT,
+Puzzle_ID INT AUTO_INCREMENT, -- Primary Key
+Room_ID INT, -- Foreign Key
 Puzzle_name varchar(45),
 Puzzles_Description varchar(45),
-Puzzle_type varchar(45), 
-) 
+Puzzle_type varchar(45),
+DifficultyLevel INT
+)
 
--- Teams 
+-- Teams
 CREATE TABLE Teams (
-Team_ID, INT AUTO INCREMENT,
+Team_ID INT AUTO_INCREMENT, -- Primary Key
+Room_ID INT, -- Foreign Key
 Start_time DATETIME,
 End_time DATETIME,
-T_Completion_Status varchar(45) -- varchar ? 
+T_Completion_Status varchar(45),-- varchar ?
+Team_Name varchar(45)
+)
+
+-- Team Players
+CREATE TABLE Team_Players (
+    TP_ID INT, -- Foreign Key
+    Player_ID INT, -- Foreign Key
 )
 
 -- Players
 CREATE TABLE Players (
-    Player_ID INT AUTO INCREMENT,
+    Player_ID INT AUTO_INCREMENT, -- Primary Key
     Player_Name varchar(45),
     Player_Nickname varchar(45),
     Player_Email varchar(45)
 )
 
--- Team Progress 
+-- Team Progress
 CREATE TABLE Team_Progress (
-    Team_ID INT,
-    Puzzle_ID INT,
+    TP_ID INT AUTO_INCREMENT, -- Primary Key
+    Team_ID INT, -- Foreign Key
+    Puzzle_ID INT, -- Foreign Key
     TP_Start_time DATETIME,
     TP_End_time DATETIME,
-    TP_Solved_Status varchar(45) -- varchar ?
+    TP_Solved_Status varchar(45),
 )
 
--- Hints 
+-- Hints
 CREATE TABLE Hints (
-    Hint_ID INT AUTO INCREMENT,
-    Puzzle_ID INT,
+    Hint_ID INT AUTO_INCREMENT, -- Primary Key
+    Puzzle_ID INT, -- Foreign Key
     Hint_text varchar(45),
-    UsageCount varchar(45)
+    UsageCount INT
 )
 
 -- Player Actions
 CREATE TABLE Player_Actions (
-    Action_ID INT AUTO INCREMENT,
-    Player_ID INT,
-    Puzzle_ID INT,
+    Action_ID INT AUTO_INCREMENT, -- Primary Key
+    Player_ID INT, -- Foreign Key
+    Puzzle_ID INT, -- Foreign Key
     Action_Type varchar(45),
-    Action_Timestamp DATETIME    
+    Action_Timestamp DATETIME
 )
